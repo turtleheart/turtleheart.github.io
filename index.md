@@ -4,7 +4,7 @@ The following are links to latest versions of files with DND-related content. I 
 
 ## Campaign-independent documents
 
-The following documents apply to any campaign or one-shot session which I GM, unless said otherwise by me.
+*The following documents apply to any campaign or one-shot session which I GM, unless said otherwise by me.*
 
 [Class additions](DND/DND_Class_Additions.pdf)
 
@@ -12,7 +12,7 @@ The class additions document contains some additional player character options, 
 
 ## Campaign-dependent documents
 
-The contents of the following documents may not apply to your campaign, depending on setting. Ask your GM.
+*The contents of the following documents may not apply to your campaign, depending on setting. Ask your GM.*
 
 [Downtime activities](DND/DowntimeActivities-player-version.pdf)
 
