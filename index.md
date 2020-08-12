@@ -2,4 +2,4 @@
 
 #DND files
 
-[Downtime activities](./Downtime_Activities-player-version.pdf)
+[Downtime activities](DND/Downtime_Activities-player-version.pdf)
