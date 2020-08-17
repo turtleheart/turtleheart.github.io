@@ -10,7 +10,7 @@ The following are links to latest versions of files with DND-related content. I 
 
 The class additions document contains some additional player character options, as well as some quality of life improvements to some classes.
 
-[Character creation guidelines](DND/Character_creation.pdf)
+[Character creation guidelines](DND/Character_Creation.pdf)
 
 The character creation document lists approved character options. Note that most campaigns will make additions and/or exceptions to this document, but it is useful as a common base.
 
