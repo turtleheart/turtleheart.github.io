@@ -25,3 +25,14 @@ The downtime activities document contains *suggestions* for what your character 
 [Magical items prices](DND/Magical_Items_Prices.pdf)
 
 A document containing prices for magical items.
+
+# A Rasp of Sand
+
+The following are links to the latest versions of files with A Rasp of Sand-related content.
+
+## Character Sheets
+
+[Character Sheet](ARoS/Character_sheet.pdf)
+[Character Sheet (form-fillable)](ARoS/Character_sheet_fillable.pdf)
+
+The character sheets are based on reddit user u/Tlazolteotll's [character sheet](https://www.reddit.com/r/rpg/comments/ay5ikp/i_made_a_simple_knave_character_sheet_in_tabletop/). They have been modified to better fit ARoS.
