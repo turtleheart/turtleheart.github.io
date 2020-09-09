@@ -24,7 +24,7 @@ The downtime activities document contains *suggestions* for what your character 
 
 [Magical items prices](DND/Magical_Items_Prices.pdf)
 
-A document containing prices for magical items.
+A document containing prices for some magical items.
 
 # A Rasp of Sand
 
