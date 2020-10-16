@@ -14,17 +14,9 @@ The class additions document contains some additional player character options, 
 
 The character creation document lists approved character options. Note that most campaigns will make additions and/or exceptions to this document, but it is useful as a common base.
 
-## Campaign-dependent documents
-
-*The contents of the following documents may not apply to your campaign, depending on setting. Ask your GM.*
-
 [Downtime activities](DND/DowntimeActivities-player-version.pdf)
 
 The downtime activities document contains *suggestions* for what your character may do during downtime.
-
-[Magical items prices](DND/Magical_Items_Prices.pdf)
-
-A document containing prices for some magical items.
 
 # A Rasp of Sand
 
