@@ -16,6 +16,10 @@ The character creation document lists approved character options. Note that most
 
 The downtime activities document contains *suggestions* for what your character may do during downtime.
 
+[Dungeon exploration](DND/Dungeon_Exploration.pdf)
+
+A document which explains what an Exploration Turn is, and how one is resolved.
+
 # A Rasp of Sand
 
 The following are links to the latest versions of files with A Rasp of Sand-related content.
