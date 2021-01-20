@@ -1,15 +1,15 @@
 :root{
-    --primary-color: #b794fC;
+    --primary-color: #6223db;
     --primary-variant-color: #8566c8;
-    --secondary-color: #fcb794;
-    --main-background-color: #121212;
-    --surface-color: #121212;
-    --error-color: #CF6679;
+    --secondary-color: #c78766;
+    --main-background-color: white;
+    --surface-color: white;
+    --error-color: #B00020;
     --on-primary-color: black;
     --on-secondary-color: black;
-    --on-background-color: white;
-    --on-surface-color: white;
-    --on-error-color: black;
+    --on-background-color: black;
+    --on-surface-color: black;
+    --on-error-color: white;
 }
 
 body {
@@ -26,9 +26,9 @@ a:visited{
 }
 /* mouse over link */
 a:hover{
-    color: white;
+    color: black;
 }
 /* selected link */
 a:active{
-    color: white;
+    color: black;
 }
