@@ -1,0 +1,34 @@
+:root{
+    --primary-color: #b794fC;
+    --primary-variant-color: #8566c8;
+    --secondary-color: yellow;
+    --main-background-color: #121212;
+    --surface-color: #121212;
+    --error-color: #CF6679;
+    --on-primary-color: black;
+    --on-secondary-color: black;
+    --on-background-color: white;
+    --on-surface-color: white;
+    --on-error-color: black;
+}
+
+body {
+    background-color: var(--main-background-color);
+    color: var(--on-background-color);
+}
+/* unvisited link */
+a:link {
+    color: #7e3ff2;
+}
+/* visited link */
+a:visited{
+    color: #b794f6;
+}
+/* mouse over link */
+a:hover{
+    color: white;
+}
+/* selected link */
+a:active{
+    color: white;
+}
