@@ -32,3 +32,38 @@ a:hover{
 a:active{
     color: white;
 }
+
+/* top navigation bar */
+.topbar{
+    background-color: var(--primary-color);
+    overflow: hidden;
+}
+.topbar_button{
+    float: right;
+}
+
+/* text block */
+.l0block{
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.l1block{
+    background-color: rgba(255, 255, 255, 0.07);
+}
+.l2block{
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.l3block{
+    background-color: rgba(255, 255, 255, 0.09);
+}
+.l4block{
+    background-color: rgba(255, 255, 255, 0.11);
+}
+.l5block{
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.l6block{
+    background-color: rgba(255, 255, 255, 0.14);
+}
+.l7block{
+    background-color: rgba(255, 255, 255, 0.15);
+}
