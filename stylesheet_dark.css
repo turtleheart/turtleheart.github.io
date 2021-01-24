@@ -1,0 +1,69 @@
+:root{
+    --primary-color: #b794fC;
+    --primary-variant-color: #8566c8;
+    --secondary-color: #fcb794;
+    --main-background-color: #121212;
+    --surface-color: #121212;
+    --error-color: #CF6679;
+    --on-primary-color: black;
+    --on-secondary-color: black;
+    --on-background-color: white;
+    --on-surface-color: white;
+    --on-error-color: black;
+}
+
+body {
+    background-color: var(--main-background-color);
+    color: var(--on-background-color);
+}
+/* unvisited link */
+a:link {
+    color: var(--primary-variant-color);
+}
+/* visited link */
+a:visited{
+    color: var(--primary-color);
+}
+/* mouse over link */
+a:hover{
+    color: white;
+}
+/* selected link */
+a:active{
+    color: white;
+}
+
+/* top navigation bar */
+.topbar{
+    background-color: var(--primary-color);
+    overflow: hidden;
+}
+.topbar_button{
+    float: right;
+}
+
+/* text block */
+.l0block{
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.l1block{
+    background-color: rgba(255, 255, 255, 0.07);
+}
+.l2block{
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.l3block{
+    background-color: rgba(255, 255, 255, 0.09);
+}
+.l4block{
+    background-color: rgba(255, 255, 255, 0.11);
+}
+.l5block{
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.l6block{
+    background-color: rgba(255, 255, 255, 0.14);
+}
+.l7block{
+    background-color: rgba(255, 255, 255, 0.15);
+}
