@@ -1,4 +1,4 @@
-export var dictTheme = {
+export const dictTheme = {
     "dark" : {
         "btn" : "Light Mode",
         "stylesheet" : "css/stylesheet_dark.css"

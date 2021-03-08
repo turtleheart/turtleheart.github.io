@@ -2,7 +2,7 @@
  * Swaps between light and dark themes
  */
 
-import {dictTheme} from "./dictonary/dict_eng.js";
+import {dictTheme} from "./dictonary/dict_theme.js";
 
 /*
  * Toggles the theme between dark/light
