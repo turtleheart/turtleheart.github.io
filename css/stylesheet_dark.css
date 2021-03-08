@@ -1,3 +1,7 @@
+/*
+ * Stylesheet for dark theme
+ */
+
 :root{
     --primary-color: #b794fC;
     --primary-variant-color: #8566c8;
@@ -12,37 +16,7 @@
     --on-error-color: black;
 }
 
-body {
-    background-color: var(--main-background-color);
-    color: var(--on-background-color);
-}
-/* unvisited link */
-a:link {
-    color: var(--primary-variant-color);
-}
-/* visited link */
-a:visited{
-    color: var(--primary-color);
-}
-/* mouse over link */
-a:hover{
-    color: white;
-}
-/* selected link */
-a:active{
-    color: white;
-}
-
-/* top navigation bar */
-.topbar{
-    background-color: var(--primary-color);
-    overflow: hidden;
-}
-.topbar_button{
-    float: right;
-}
-
-/* text block */
+/* Elevation backgrounds */
 .l0block{
     background-color: rgba(255, 255, 255, 0.05);
 }

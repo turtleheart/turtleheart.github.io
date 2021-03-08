@@ -1,0 +1,34 @@
+/*
+ * Stylesheet for all themes
+ */
+
+body {
+    background-color: var(--main-background-color);
+    color: var(--on-background-color);
+}
+
+/* unvisited link */
+a:link {
+    color: var(--primary-variant-color);
+}
+/* visited link */
+a:visited{
+    color: var(--primary-color);
+}
+/* mouse over link */
+a:hover{
+    color: var(--on-background-color);
+}
+/* selected link */
+a:active{
+    color: var(--on-background-color);
+}
+
+/* top navigation bar */
+.topbar{
+    background-color: var(--primary-color);
+    overflow: hidden;
+}
+.topbar_button{
+    float: right;
+}

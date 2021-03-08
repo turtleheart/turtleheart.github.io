@@ -1,3 +1,7 @@
+/*
+ * Stylesheet for light theme
+ */
+
 :root{
     --primary-color: #6223db;
     --primary-variant-color: #8566c8;
@@ -12,37 +16,7 @@
     --on-error-color: white;
 }
 
-body {
-    background-color: var(--main-background-color);
-    color: var(--on-background-color);
-}
-/* unvisited link */
-a:link {
-    color: var(--primary-variant-color);
-}
-/* visited link */
-a:visited{
-    color: var(--primary-color);
-}
-/* mouse over link */
-a:hover{
-    color: black;
-}
-/* selected link */
-a:active{
-    color: black;
-}
-
-/* top navigation bar */
-.topbar{
-    background-color: var(--primary-color);
-    overflow: hidden;
-}
-.topbar_button{
-    float: right;
-}
-
-/* text block */
+/* Elevation backgrounds */
 .l0block{
     background-color: rgba(0, 0, 0, 0.05);
 }
