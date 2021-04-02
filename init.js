@@ -29,6 +29,16 @@ $("document").ready(function() {
         .html(dictText["EN(UK)"]["dnd-campaign-dungeonExploration-link"])
         .attr("href", dictLinks["EN(UK)"]["dnd-dungeonExploration"]);
     $("#dnd-campaign-dungeonExploration-desc").html(dictText["EN(UK)"]["dnd-campaign-dungeonExploration-desc"]);
+    $("#dnd-campaign-socialEncounters-link")
+        .html(dictText["EN(UK)"]["dnd-campaign-socialEncounters-link"])
+        .attr("href", dictLinks["EN(UK)"]["dnd-campaign-socialEncounters"]);
+    $("#dnd-campaign-socialEncounters-desc").html(dictText["EN(UK)"]["dnd-campaign-socialEncounters-desc"]);
+    $("#dnd-depCampaign-title").html(dictText["EN(UK)"]["dnd-depCampaign-title"]);
+    $("#dnd-depCampaign-desc").html(dictText["EN(UK)"]["dnd-depCampaign-desc"]);
+    $("#dnd-depCampaign-strongholds-link")
+        .html(dictText["EN(UK)"]["dnd-depCampaign-strongholds-link"])
+        .attr("href", dictLinks["EN(UK)"]["dnd-depCampaign-strongholds"]);
+    $("#dnd-depCampaign-strongholds-desc").html(dictText["EN(UK)"]["dnd-depCampaign-strongholds-desc"]);
     $("#aros-title").html(dictText["EN(UK)"]["aros-title"]);
     $("#aros-desc").html(dictText["EN(UK)"]["aros-desc"]);
     $("#aros-sheet-link1")
