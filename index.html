@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>turtleheart.github.io</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/stylesheet_dark.css" id="theme_link">
     <link rel="stylesheet" href="css/universal.css">
@@ -15,34 +19,43 @@
 <div class="topbar"> <!-- Page top bar start -->
     <button class="topbar_button" id="btn_theme" type="button">Theme</button>
 </div> <!-- Page top bar end -->
-<div class="l0block"> <!-- DND 5E start -->
-    <h1 id="dnd-title"></h1>
+<div class="l0block textBlock"> <!-- DND 5E start -->
+    <h1 id="dnd-title" class="title"></h1>
     <p id="dnd-desc"></p>
     <div class="l1block"> <!-- DND 5e Campaign-indep docs start -->
         <h2 id="dnd-campaign-title"></h2>
         <p id="dnd-campaign-desc"></p>
-        <div class="l2block">
-            <a id="dnd-campaign-create-link"></a>
-            <p id="dnd-campaign-create-desc"></p>
-        </div>
-        <div class="l2block">
-            <a id="dnd-campaign-downtime-link"></a>
-            <p id="dnd-campaign-downtime-desc"></p>
-        </div>
-        <div class="l2block">
-            <a id="dnd-campaign-dungeonExploration-link"></a>
-            <p id="dnd-campaign-dungeonExploration-desc"></p>
-        </div>
+        <ul>
+            <li class="linkList">
+                <a id="dnd-campaign-create-link"></a>
+                <br>
+                <span id="dnd-campaign-create-desc"></span>
+            </li>
+            <li class="linkList">
+                <a id="dnd-campaign-downtime-link"></a>
+                <br>
+                <span id="dnd-campaign-downtime-desc"></span>
+            </li>
+            <li class="linkList">
+                <a id="dnd-campaign-dungeonExploration-link"></a>
+                <br>
+                <span id="dnd-campaign-dungeonExploration-desc"></span>
+            </li>
+        </ul>
     </div> <!-- DND 5e Campaign-indep docs end -->
 </div> <!-- DND 5E end -->
-<div class="l0block"> <!-- ARoS start -->
-    <h1 id="aros-title"></h1>
+<div class="l0block textBlock"> <!-- ARoS start -->
+    <h1 id="aros-title" class="title"></h1>
     <p id="aros-desc"></p>
-    <div class="l1block">
-        <p><a id="aros-sheet-link1"></a></p>
-        <p><a id="aros-sheet-link2"></a></p>
-        <p id="aros-sheet-desc"></p>
-    </div>
+    <ul>
+        <li class="linkList" style="list-style: none">
+            <ul>
+                <li><a id="aros-sheet-link1"></a></li>
+                <li><a id="aros-sheet-link2"></a></li>
+            </ul>
+            <span id="aros-sheet-desc"></span>
+        </li>
+    </ul>
 </div> <!-- ARoS end -->
 </body>
 </html>

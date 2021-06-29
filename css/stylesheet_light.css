@@ -6,14 +6,17 @@
     --primary-color: #6223db;
     --primary-variant-color: #8566c8;
     --secondary-color: #c78766;
+    --secondary-variant-color: #c78766;
     --main-background-color: white;
     --surface-color: white;
     --error-color: #B00020;
-    --on-primary-color: black;
+    --on-primary-color: white;
     --on-secondary-color: black;
     --on-background-color: black;
     --on-surface-color: black;
     --on-error-color: white;
+    --link-color: #efe5fe;
+    --link-color-visited: #d4bffd;
 }
 
 /* Elevation background colours */

@@ -3,25 +3,43 @@
  */
 
 body {
+
+    --title-font-family: 'Roboto', sans-serif;
+    --title-font-size: 2em;
+    --text-font-family: 'Roboto', sans-serif;
+    --text-font-size: 1em;
+    --link-font-family: 'Roboto', sans-serif;
+    --link-font-size: 1em;
+
     background-color: var(--main-background-color);
     color: var(--on-background-color);
 }
 
+a{
+    font-family: var(--link-font-family);
+    font-size: var(--link-font-size);
+}
+
+span, p{
+    font-family: var(--text-font-family);
+    font-size: var(--text-font-size);
+}
+
 /* unvisited link */
 a:link {
-    color: var(--primary-variant-color);
+    color: var(--link-color);
 }
 /* visited link */
 a:visited{
-    color: var(--primary-color);
+    color: var(--link-color-visited);
 }
 /* mouse over link */
 a:hover{
-    color: var(--on-background-color);
+    color: var(--on-primary-color);
 }
 /* selected link */
 a:active{
-    color: var(--on-background-color);
+    color: var(--on-primary-color);
 }
 
 /* top navigation bar */
@@ -30,7 +48,26 @@ a:active{
     overflow: hidden;
 }
 .topbar_button{
+    background-color: var(--secondary-color);
     float: right;
+    border: 0;
+    padding: 0.5em;
+}
+
+.linkList{
+    margin-top: 1em;
+    list-style-position: inside;
+}
+
+.title{
+    font-family: var(--title-font-family);
+}
+
+.textBlock{
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+    padding: 0.5em;
+    margin: 1em;
 }
 
 /* Elevations */

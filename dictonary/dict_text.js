@@ -1,7 +1,7 @@
 export const dictText = {
     "EN(UK)": {
         "dnd-title" : "DND 5E",
-        "dnd-desc" : "The following are links to latest versions of files with DND-related content. I <strong>strongly</strong> recommended that you access the documents through these links instead of downloading a local copy, as the contents of the documents can and will change.",
+        "dnd-desc" : "The following are links to latest versions of files with DND-related content. I <strong>strongly</strong> recommended that you access the documents through these links instead of downloading a local copy, as their contents can and will change.",
         "dnd-campaign-title" : "Campaign-independent documents",
         "dnd-campaign-desc" : "<em>The following documents apply to any campaign or one-shot session which I GM, unless said otherwise by me.</em>",
         "dnd-campaign-create-link" : "Character creation guidelines",
