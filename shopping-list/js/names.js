@@ -36,6 +36,18 @@ const classes = {
     SHOPPING_LIST_ITEM: {
         raw: "shopping-list-item",
         dot: ".shopping-list-item",
+    },
+    SHOPPING_LIST_ITEM_CHECKED: {
+        raw: "shopping-list-item-checked",
+        dot: ".shopping-list-item-checked"
+    },
+    SHOPPING_LIST_ITEM_NAME: {
+        raw: "shopping-list-item-name",
+        dot: ".shopping-list-item-name"
+    },
+    SHOPPING_LIST_ITEM_QUANTITY: {
+        raw: "shopping-list-item-quantity",
+        dot: ".shopping-list-item-quantity"
     }
 }
 

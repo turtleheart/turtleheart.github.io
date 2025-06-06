@@ -1,119 +1,6 @@
-import {getState, updateState} from "./state.js";
-import {classes, ids} from "./names.js";
-import {clearList, createListItem, createShoppingListItem, setNameOfActiveListInUI, showListUI} from "./uiManager.js";
-import {
-    DEFAULT_LIST_NAME,
-    DEFAULT_SHOPPING_LIST,
-    DEFAULT_SHOPPING_LIST_ITEM, DEFAULT_STATE
-} from "./defaults.js";
-
-/**
- * Creates a debounced function that delays invoking the provided function
- * until after the specified wait time has elapsed since the last time
- * the debounced function was called.
- *
- * @param {Function} func The function to debounce.
- * @param {number} wait The number of milliseconds to delay the invocation of the function.
- * @return {Function} Returns the new debounced function.
- */
-function debounce(func, wait) {
-    let timeout;
-    return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-}
-
-/**
- * A debounced version of the `updateState` function.
- *
- * The debounce interval (300 milliseconds) ensures that `updateState` is executed
- * only after the specified delay has elapsed since the last call.
- */
-const debouncedUpdateState = debounce(updateState, 300);
-
-/**
- * Listen for changes and update the state accordingly.
- * @param elem {HTMLElement} The element to listen for changes on.
- */
-function listenForChanges(elem) {
-    elem.addEventListener('change', () => {
-        debouncedUpdateState(getState());
-    });
-}
-
-/**
- * Parse the state from the UI.
- * @returns {State} The parsed state.
- */
-function parseStateFromUI() {
-    const newState = DEFAULT_STATE();
-    const oldState = getState(); // We have to assume that non-displayed lists are current
-    /** @type {NodeList} */
-    const lists = document.querySelectorAll(classes.SELECTION_LIST_ITEM.dot);
-    lists.forEach((list, idx) => {
-        const listName = list.querySelector(classes.SELECTION_LIST_ITEM_NAME.dot).textContent;
-        if (!listName) {
-            console.error('Failed to find list name element');
-        }
-        if (list.classList.contains("active")) {
-            newState.activeList = idx;
-        }
-        newState.shoppingLists[idx] = oldState.activeList === idx
-            ? parseActiveListFromUI() : JSON.parse(JSON.stringify(oldState.shoppingLists[idx]));
-    });
-    return newState;
-}
-
-/**
- * Parses the active list of items from the user interface and returns it in a structured format.
- *
- * @return {ShoppingList} A structured representation of the active list parsed from the UI.
- */
-function parseActiveListFromUI() {
-    /** @type {HTMLDivElement} */
-    const activeListElement = document.getElementById(ids.SHOPPING_LIST_ID);
-    if (!activeListElement) {
-        console.error('Failed to find active list in UI');
-        return DEFAULT_SHOPPING_LIST();
-    }
-    /** @type {HTMLDivElement} */
-    const listNameRoot = document.getElementById(ids.LIST_NAME_INPUT);
-    if (!listNameRoot) {
-        console.error('Failed to find list name input element');
-    }
-    /** @type {string} */
-    const listName = listNameRoot
-        ? document.getElementById(ids.LIST_NAME_INPUT).value.trim()
-        : DEFAULT_LIST_NAME();
-    /** @type {ShoppingListItem[]} */
-    const items = [];
-    for (const itemElement of activeListElement.children) {
-        if (itemElement.getElementsByClassName(classes.SHOPPING_LIST_ITEM.raw).length > 0) {
-            items.push(parseShoppingListItemFromUI(itemElement));
-        }
-    }
-    return {
-        name: listName,
-        items: items,
-    };
-}
-
-
-function parseShoppingListItemFromUI(itemElement) {
-    const nameInput = itemElement.querySelector('input[name="name"]');
-    const quantityInput = itemElement.querySelector('input[name="quantity"]');
-    const checkbox = itemElement.querySelector('input[name="checked"]');
-    if (!nameInput || !quantityInput || !checkbox) {
-        console.error('Failed to find input elements for shopping list item');
-        return DEFAULT_SHOPPING_LIST_ITEM();
-    }
-    return {
-        name: nameInput.value,
-        quantity: quantityInput.value,
-        checked: checkbox.checked,
-    };
-}
+import {debouncedUpdateState, getState} from "./state.js";
+import {ids} from "./names.js";
+import {clearList, createListItem, createShoppingListItem, showListUI} from "./uiManager.js";
 
 /**
  * Render the UI from the state.
@@ -169,6 +56,7 @@ function renderSelectedList(state) {
         return;
     }
     showListUI(true);
+    document.getElementById(ids.LIST_NAME_TEXT).innerText = activeList.name;
     activeList.items.forEach((item, idx) => {
         try {
             if (shoppingListRootElement.children.length >= 2) {
@@ -182,34 +70,78 @@ function renderSelectedList(state) {
             console.error("Failed to create shopping list item:", error);
         }
     });
-    setNameOfActiveListInUI(activeList.name);
+    renameActiveList(activeList.name);
 }
 
 /**
- * Adds a shopping list item to the specified shopping list in the state object.
- * Validates the input parameters and logs an error if the state or list data is invalid.
+ * Retrieves a shopping list at the specified index from the state object.
  *
- * @param {Object} state - The state object containing shopping lists.
- * @param {number} listIdx - The index of the shopping list to which the item will be added.
- * @param {Object} item - The shopping list item to be added to the specified list.
- * @return {void} No return value; modifies the state object directly.
+ * @param {State} state - The state object containing an array of shopping lists.
+ * @param {number} listIdx - The index of the shopping list to retrieve.
+ * @return {ShoppingList|undefined} The shopping list at the specified index, or undefined if the index is invalid.
  */
-function addShoppingListItemToState(state, listIdx, item) {
-    if (!state) {
-        console.error('State is null or undefined');
-        return;
-    }
-    if (!Array.isArray(state.shoppingLists)) {
-        console.error('State shopping list data is malformed');
-        return;
-    }
+function getListAtIndex(state, listIdx) {
     if (listIdx < 0 || listIdx >= state.shoppingLists.length) {
         console.error(`Invalid list index: ${listIdx}`);
         return;
     }
+    return state.shoppingLists[listIdx];
+}
 
-    const list = state.shoppingLists[listIdx];
-    list.items.push(item);
+/**
+ * Retrieves the item at the specified index from the provided shopping list.
+ *
+ * @param {ShoppingList} list - The list object containing an `items` array property.
+ * @param {number} itemIdx - The index of the item to retrieve.
+ * @return {ShoppingListItem|undefined} The item at the specified index, or undefined if the index is invalid.
+ */
+function getItemAtIndex(list, itemIdx) {
+    if (itemIdx < 0 || itemIdx >= list.items.length) {
+        console.error(`Invalid item index: ${itemIdx}`);
+        return;
+    }
+    return list.items[itemIdx];
+}
+
+/**
+ * Retrieves the active item at the specified index from the currently active shopping list.
+ *
+ * @param {number} itemIdx - The index of the item to retrieve from the active shopping list.
+ * @return {ShoppingListItem|undefined} The item located at the specified index in the active shopping list,
+ *              or undefined if the index is invalid.
+ */
+function getActiveItemAtIndex(itemIdx) {
+    const state = getState();
+    return getItemAtIndex(state.shoppingLists[state.activeList], itemIdx);
+}
+
+/**
+ * Updates the item at the specified index within the list.
+ *
+ * @param {ShoppingList} list - The list object containing an array of items.
+ * @param {number} itemIdx - The index of the item to be updated in the list.
+ * @param {ShoppingListItem} item - The new item to set at the specified index.
+ * @return {void} This method does not return a value.
+ */
+function setItemAtIndex(list, itemIdx, item) {
+    if (itemIdx < 0 || itemIdx >= list.items.length) {
+        console.error(`Invalid item index: ${itemIdx}`);
+        return;
+    }
+    list.items[itemIdx] = item;
+    debouncedUpdateState(getState());
+}
+
+/**
+ * Sets the active item at the specified index in the currently active shopping list.
+ *
+ * @param {number} itemIdx - The index of the item to be set as active.
+ * @param {ShoppingListItem} item - The item object to set at the specified index.
+ * @return {void} This method does not return a value.
+ */
+function setActiveItemAtIndex(itemIdx, item) {
+    const state = getState();
+    setItemAtIndex(state.shoppingLists[state.activeList], itemIdx, item);
 }
 
 /**
@@ -219,8 +151,34 @@ function addShoppingListItemToState(state, listIdx, item) {
  */
 function addShoppingListItem(listIdx, item) {
     const state = getState();
-    addShoppingListItemToState(state, listIdx, item);
-    updateState(state);
+    const list = getListAtIndex(state, listIdx);
+    list.items.push(item);
+    debouncedUpdateState(state);
+}
+
+/**
+ * Removes an item from the currently active shopping list based on the provided index.
+ *
+ * @param {number} itemIdx*/
+function removeShoppingListItemFromActiveList(itemIdx) {
+    const state = getState();
+    const list = getListAtIndex(state, state.activeList);
+    list.items.splice(itemIdx, 1);
+    debouncedUpdateState(state);
+}
+
+/**
+ * Moves a shopping list item from one position to another within the active list.
+ * @param {number} sourceIdx - The index of the item to move.
+ * @param {number} destIdx - The destination index where the item should be moved to.
+ * @return {void}
+ */
+function moveShoppingListItemInActiveList(sourceIdx, destIdx) {
+    const state = getState();
+    const list = getListAtIndex(state, state.activeList);
+    const item = list.items.splice(sourceIdx, 1)[0];
+    list.items.splice(destIdx, 0, item);
+    debouncedUpdateState(state);
 }
 
 /**
@@ -231,7 +189,55 @@ function addShoppingList(list) {
     const state = getState();
     state.shoppingLists.push(list);
     state.activeList = state.shoppingLists.length - 1;
-    updateState(state);
+    debouncedUpdateState(state);
 }
 
-export { renderUI, listenForChanges, addShoppingListItem, addShoppingList };
+/**
+ * Removes a shopping list from the application's state by its index.
+ * Also adjusts the active list index if the removed list was the active list.
+ *
+ * @param {number} idx - The index of the shopping list to remove.
+ * @return {void}
+ */
+function removeShoppingList(idx) {
+    const state = getState();
+    if (idx < 0 || idx > state.shoppingLists.length) {
+        console.error(`Invalid list index: ${idx}`)
+        return;
+    }
+    state.shoppingLists.splice(idx, 1);
+    // Handle the case where we delete our currently active list
+    if (state.activeList === idx) {
+        state.activeList = state.shoppingLists.length > 0 ? Math.max(state.activeList - 1, 0) : -1;
+    }
+    debouncedUpdateState(state);
+}
+
+function renameActiveList(name) {
+    const state = getState();
+    const activeList = getListAtIndex(state, state.activeList);
+    activeList.name = name;
+    debouncedUpdateState(state);
+}
+
+/**
+ * Sets the active list by its index in the shopping lists array.
+ * Validates that the provided index is within the bounds of the shopping lists array.
+ * Updates the active list index and triggers a debounced update of the state.
+ *
+ * @param {number} idx - The index of the shopping list to set as active.
+ *          Must be within the range of the shopping lists array.
+ * @return {void}
+ */
+function setActiveList(idx) {
+    const state = getState();
+    if (idx < 0 || idx > state.shoppingLists.length) {
+        console.error(`Invalid active list index: ${idx}`);
+        return;
+    }
+    state.activeList = idx;
+    debouncedUpdateState(state);
+}
+
+export { renderUI, addShoppingListItem, addShoppingList, removeShoppingList, removeShoppingListItemFromActiveList,
+    moveShoppingListItemInActiveList, setActiveList, getActiveItemAtIndex, setActiveItemAtIndex, renameActiveList };

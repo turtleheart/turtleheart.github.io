@@ -2,3 +2,12 @@
     opacity: 0.5;
     border: 2px dashed #000 !important;
 }
+
+#lists-container .shopping-list-item:has(.shopping-list-item-checked input:checked) {
+    opacity: 0.75;
+    transition: all 0.3s ease;
+}
+
+#lists-container .shopping-list-item {
+    background-color: var(--bs-tertiary-bg);
+}

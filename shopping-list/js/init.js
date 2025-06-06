@@ -1,5 +1,5 @@
 import {getState, subscribe} from "./state.js";
-import {addShoppingList, addShoppingListItem, listenForChanges, renderUI} from "./stateManager.js";
+import {addShoppingList, addShoppingListItem, renameActiveList, renderUI} from "./stateManager.js";
 import {classes, ids} from "./names.js";
 import {DEFAULT_SHOPPING_LIST, DEFAULT_SHOPPING_LIST_ITEM} from "./defaults.js";
 
@@ -42,8 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         nameInput.addEventListener('blur', () => {
             if (nameInput.value.trim()) {
-                // TODO: change the list's name via stateManager instead of directly?
-                nameText.textContent = nameInput.value;
+                renameActiveList(nameInput.value);
             }
             nameText.classList.remove('d-none');
             nameInput.classList.add('d-none');
@@ -69,7 +68,4 @@ document.addEventListener('DOMContentLoaded', () => {
     subscribe((state) => {
         renderUI(state);
     });
-
-    // Update the state when we make changes
-    listenForChanges(document.getElementById(ids.MAIN_CONTAINER_ID));
 });

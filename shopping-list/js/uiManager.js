@@ -1,4 +1,9 @@
 import {classes, ids} from "./names.js";
+import {
+    moveShoppingListItemInActiveList,
+    removeShoppingList,
+    removeShoppingListItemFromActiveList, renameActiveList, setActiveItemAtIndex, setActiveList
+} from "./stateManager.js";
 
 /**
  * Creates a new list item element with a name and a delete button.
@@ -43,27 +48,33 @@ function createListItem(name, idx, active) {
     return listItem;
 }
 
+/**
+ * Initialises a select list item by attaching a click event listener.
+ * When the item is clicked, it sets the item as active based on its index.
+ *
+ * @param {HTMLElement} item - The list item element to be initialised.
+ * @return {void}
+ */
 function initSelectListItem(item) {
+    const idx = Number(item.dataset.idx);
+    // If we click the item, set it as active
     item.addEventListener('click', () => {
-        selectListAsActive(item);
+        setActiveList(Number(idx));
     });
 }
 
-function selectListAsActive(item) {
-    const listItems = document.querySelectorAll(classes.SELECTION_LIST_ITEM.dot);
-    listItems.forEach((listItem) => {
-        listItem.classList.remove("active");
-    });
-    item.classList.add("active");
-    dispatchGlobalChangeEvent();
-}
-
+/**
+ * Initialises the remove list button with a click event listener to remove a shopping list item.
+ *
+ * @param {HTMLElement} deleteButton - The button element used to remove the corresponding shopping list item.
+ * @return {void} This function does not return a value.
+ */
 function initRemoveListButton(deleteButton) {
     const listItem = deleteButton.closest(classes.SELECTION_LIST_ITEM.dot);
+    const idx = listItem.dataset.idx;
     deleteButton.addEventListener('click', (event) => {
-        // TODO: handle case if we have selected the list to delete
+        removeShoppingList(Number(idx));
         event.stopPropagation();
-        listItem?.remove();
         dispatchGlobalChangeEvent();
     });
 }
@@ -75,14 +86,11 @@ function initRemoveListButton(deleteButton) {
  * @returns {HTMLDivElement} The created shopping list item element
  */
 function createShoppingListItem(item, idx) {
-    // Create the outer column container
-    const colContainer = document.createElement('div');
-    colContainer.className = 'col-sm-6 col-md-4';
-    colContainer.dataset.idx = String(idx);
-
     // Create the shopping list item container
     const itemContainer = document.createElement('div');
-    itemContainer.className = 'shopping-list-item d-flex align-items-center justify-content-between border p-2 mb-2';
+    itemContainer.className = classes.SHOPPING_LIST_ITEM.raw +
+        ' col-sm-6 col-md-4 d-flex align-items-center justify-content-between border p-2 mb-2';
+    itemContainer.dataset.idx = String(idx);
 
     // Create the left section container
     const leftSection = document.createElement('div');
@@ -90,7 +98,7 @@ function createShoppingListItem(item, idx) {
 
     // Create checkbox wrapper
     const checkboxWrapper = document.createElement('div');
-    checkboxWrapper.className = 'form-check me-2';
+    checkboxWrapper.className = classes.SHOPPING_LIST_ITEM_CHECKED.raw + ' form-check me-2';
     const checkbox = document.createElement('input');
     checkbox.className = 'form-check-input';
     checkbox.type = 'checkbox';
@@ -111,7 +119,7 @@ function createShoppingListItem(item, idx) {
     // Create quantity input
     const quantityInput = document.createElement('input');
     quantityInput.type = 'number';
-    quantityInput.className = 'form-control form-control-sm';
+    quantityInput.className = classes.SHOPPING_LIST_ITEM_QUANTITY.raw + ' form-control form-control-sm';
     quantityInput.setAttribute('aria-label', 'quantity');
     quantityInput.style.width = '70px';
     quantityInput.value = String(item.quantity || 1);
@@ -121,7 +129,7 @@ function createShoppingListItem(item, idx) {
     // Create item name input
     const nameInput = document.createElement('input');
     nameInput.type = 'text';
-    nameInput.className = 'form-control form-control-sm mx-2';
+    nameInput.className = classes.SHOPPING_LIST_ITEM_NAME.raw + ' form-control form-control-sm mx-2';
     nameInput.setAttribute('aria-label', 'item');
     nameInput.value = item.name || '';
     nameInput.placeholder = 'Item';
@@ -144,29 +152,43 @@ function createShoppingListItem(item, idx) {
     itemContainer.appendChild(leftSection);
     itemContainer.appendChild(deleteButton);
 
-    colContainer.appendChild(itemContainer);
-
     // Initialise logic for the item
     initDraggableItem(dragHandle);
     initRemoveItemButton(deleteButton);
+    initShoppingListItem(itemContainer);
 
-    return colContainer;
+    return itemContainer;
 }
 
 /**
- * Updates the UI to reflect the name of the currently active list.
+ * Initialises a shopping list item, sets up an event listener for its changes,
+ * and updates the active item at the specified index.
  *
- * @param {string} name - The name to set as the active list's display name in the UI.
+ * @param {HTMLElement} item The DOM element representing the shopping list item to initialise.
+ * @return {void}
  */
-function setNameOfActiveListInUI(name) {
-    const listNameInputElement = document.getElementById(ids.LIST_NAME_INPUT);
-    listNameInputElement.value = name;
-    const listNameSpan = document.getElementById(ids.LIST_NAME_TEXT);
-    listNameSpan.innerText = name;
+function initShoppingListItem(item) {
+    const idx = Number(item.dataset.idx);
+    item.addEventListener('change', () => {
+        /** @type {ShoppingListItem} */
+        const thisItem = {
+            name: item.querySelector(classes.SHOPPING_LIST_ITEM_NAME.dot).value,
+            quantity: item.querySelector(classes.SHOPPING_LIST_ITEM_QUANTITY.dot).value,
+            checked: item.querySelector(classes.SHOPPING_LIST_ITEM_CHECKED.dot + " input").checked
+        };
+        setActiveItemAtIndex(idx, thisItem);
+    });
 }
 
 /** @type {HTMLElement} */
 let draggedItem = null;
+/** @type {number} */
+let draggedIdx = -1;
+/** @type {number} */
+let targetIdx = -1;
+/** @type {ChildNode} */
+let originalNextSibling = null;
+
 
 /**
  * Initialise drag logic for a shopping list HTML item.
@@ -178,6 +200,8 @@ function initDraggableItem(item) {
     // When drag starts
     listItem.addEventListener('dragstart', (e) => {
         draggedItem = listItem;
+        draggedIdx = Number(listItem.dataset.idx);
+        originalNextSibling = listItem.nextSibling;
         e.dataTransfer.effectAllowed = 'move';
         // Add a class to style the dragged item
         listItem.classList.add('dragging');
@@ -185,12 +209,23 @@ function initDraggableItem(item) {
 
     // When drag ends
     listItem.addEventListener('dragend', () => {
+        // Only update the data model if the item was actually moved to a new position
+        const currentNextSibling = draggedItem.nextSibling;
+        const currentPrevSibling = draggedItem.previousSibling;
+        const didPositionChange = (
+            originalNextSibling !== currentNextSibling ||
+            (originalNextSibling === null && currentPrevSibling !== null)
+        );
+
+        if (didPositionChange && targetIdx !== -1 && targetIdx !== draggedIdx) {
+            moveShoppingListItemInActiveList(Number(draggedIdx), Number(targetIdx));
+        }
+
         draggedItem = null;
+        draggedIdx = -1;
+        targetIdx = -1;
+        originalNextSibling = null;
         listItem.classList.remove('dragging');
-        listItem.dispatchEvent(new Event('change', {
-            bubbles: true,
-            cancelable: true
-        }));
     });
 
     // When dragging over another item
@@ -206,27 +241,26 @@ function initDraggableItem(item) {
             const threshold = isHorizontal ? rect.width / 2 : rect.height / 2;
 
             if (position < threshold) {
-                listItem.parentNode.parentNode.insertBefore(draggedItem.parentNode, listItem.parentNode);
+                listItem.parentNode.insertBefore(draggedItem, listItem);
             } else {
-                listItem.parentNode.parentNode.insertBefore(draggedItem.parentNode, listItem.parentNode.nextSibling);
+                listItem.parentNode.insertBefore(draggedItem, listItem.nextSibling);
             }
+            targetIdx = Number(listItem.dataset.idx);
         }
     });
 }
 
 /**
+ * Initialises the remove item button for a shopping list item.
  *
- * @param {HTMLElement} item - the button to initialise
+ * @param {HTMLElement} item - The button element representing the remove action for a shopping list item.
+ * @return {void} This method does not return a value.
  */
 function initRemoveItemButton(item) {
     const listItem = item.closest(classes.SHOPPING_LIST_ITEM.dot);
+    const itemIdx = listItem.dataset.idx;
     item.addEventListener('click', () => {
-        // Remove the parent, since the list item is contained inside a div wrapper
-        const parent = listItem.parentNode;
-        if (parent) {
-            parent.parentNode?.removeChild(parent);
-        }
-        dispatchGlobalChangeEvent();
+        removeShoppingListItemFromActiveList(Number(itemIdx));
     })
 }
 
@@ -268,4 +302,4 @@ function showListUI(show) {
     shoppingListRootElement.style.display = show ? 'initial' : 'none';
 }
 
-export { createListItem, createShoppingListItem, clearList, showListUI, setNameOfActiveListInUI };
+export { createListItem, createShoppingListItem, clearList, showListUI };
