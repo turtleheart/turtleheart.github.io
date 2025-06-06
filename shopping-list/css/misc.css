@@ -1,0 +1,4 @@
+#lists-container .shopping-list-item.dragging {
+    opacity: 0.5;
+    border: 2px dashed #000 !important;
+}

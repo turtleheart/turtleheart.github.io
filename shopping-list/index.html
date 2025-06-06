@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping list</title>
+    <!-- CSS imports -->
+    <link rel="stylesheet" href="css/misc.css">
+    <link rel="stylesheet" href="assets/bootstrap-5.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css">
+</head>
+<body class="bg-body-secondary vh-100">
+<nav class="navbar navbar-expand-sm navbar-fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#" onclick="window.location.reload(); return false;">
+            <img src="assets/images/logo.png" alt="logo" width="30px" height="30px" class="d-inline-block align-text-top">
+            Shopping List
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a id="lists-tab" class="nav-link active" aria-current="page" href="#" data-bs-toggle="tab" data-bs-target="#lists" aria-controls="lists">Lists</a>
+                </li>
+                <li class="nav-item">
+                    <a id="items-manager-tab" class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#items-manager" aria-controls="items-manager">Manage items</a>
+                </li>
+                <li class="nav-item">
+                    <a id="settings-tab" class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#settings" aria-controls="settings">Settings</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="main-content" class="container bg-body mt-2 tab-content p-2" style="min-height: 90vh;">
+    <div class="tab-pane fade show active" id="lists" role="tabpanel" aria-labelledby="lists-tab">
+        <div class="row">
+            <div id="listsPanel" class="col-sm-2 col-md-2 border-end mb-4">
+                <h1>Lists</h1>
+                <div id="shopping-lists-menu-group" class="list-group">
+                    <a href="#" onclick="return false;"
+                       class="d-flex justify-content-between list-group-item list-group-item-action py-3">
+                        <span>A list's name</span>
+                        <button type="button" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </a>
+                    <a href="#" onclick="return false;"
+                       class="d-flex justify-content-between gap-2 list-group-item list-group-item-action py-3">
+                        <span>A second list</span>
+                        <button type="button" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </a>
+                    <a href="#" onclick="return false;"
+                       class="d-flex justify-content-between gap-2 list-group-item list-group-item-action py-3">
+                        <span>A third list</span>
+                        <button type="button" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </a>
+                    <a id="add-lists-btn" href="#" onclick="return false;" data-keep="true"
+                       class="d-flex align-items-center justify-content-center gap-2 list-group-item list-group-item-action list-group-item-success py-3">
+                        <i class="bi bi-plus-circle"></i> Create list
+                    </a>
+                    <a href="#" onclick="return false;" data-keep="true"
+                       class="d-flex align-items-center justify-content-center gap-2 list-group-item list-group-item-action list-group-item-primary py-3">
+                        <i class="bi bi-download"></i> Import List
+                    </a>
+                </div>
+            </div>
+            <div id="listsContent" class="col-sm-10 col-md-10" style="min-height: 90vh;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 id="list-name" class="mt-2 d-flex align-items-center gap-2">
+                        <span id="list-name-text" class="list-name-text">List name</span>
+                        <input type="text" id="list-name-input" class="form-control d-none" value="List name">
+                        <button type="button" class="btn btn-sm text-secondary border-0 list-name-edit-btn"
+                                aria-label="Edit list name"><i class="bi bi-pencil"></i>
+                        </button>
+                    </h2>
+                    <button type="button" class="btn btn-primary d-flex align-items-center gap-2">
+                        <i class="bi bi-upload"></i> Export list
+                    </button>
+                </div>
+                <div id="lists-container" class="container">
+                    <div id="shopping-list" class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="shopping-list-item d-flex align-items-center justify-content-between border p-2 mb-2">
+                                <div class="d-flex align-items-center col">
+                                    <div class="form-check me-2">
+                                        <input class="form-check-input" type="checkbox"
+                                               aria-label="bought">
+                                    </div>
+                                    <div class="drag-handle me-2" style="cursor: move;" draggable="true">
+                                        <i class="bi bi-grip-vertical"></i>
+                                    </div>
+                                    <input type="number" class="form-control form-control-sm"
+                                           aria-label="quantity"
+                                           style="width: 70px" value="1" min="1">
+                                    <input type="text" class="form-control form-control-sm mx-2"
+                                           aria-label="item"
+                                           value="" placeholder="Item">
+                                </div>
+                                <button type="button" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="shopping-list-item d-flex align-items-center justify-content-between border p-2 mb-2">
+                                <div class="d-flex align-items-center col">
+                                    <div class="form-check me-2">
+                                        <input class="form-check-input" type="checkbox"
+                                               aria-label="bought">
+                                    </div>
+                                    <div class="drag-handle me-2" style="cursor: move;" draggable="true">
+                                        <i class="bi bi-grip-vertical"></i>
+                                    </div>
+                                    <input type="number" class="form-control form-control-sm"
+                                           aria-label="quantity"
+                                           style="width: 70px" value="2" min="1">
+                                    <input type="text" class="form-control form-control-sm mx-2"
+                                           aria-label="item"
+                                           value="Apple" placeholder="Item">
+                                </div>
+                                <button type="button" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="shopping-list-item d-flex align-items-center justify-content-between border p-2 mb-2">
+                                <div class="d-flex align-items-center col">
+                                    <div class="form-check me-2">
+                                        <input class="form-check-input" type="checkbox"
+                                               aria-label="bought">
+                                    </div>
+                                    <div class="drag-handle me-2" style="cursor: move;" draggable="true">
+                                        <i class="bi bi-grip-vertical"></i>
+                                    </div>
+                                    <input type="number" class="form-control form-control-sm"
+                                           aria-label="quantity"
+                                           style="width: 70px" value="3" min="1">
+                                    <input type="text" class="form-control form-control-sm mx-2"
+                                           aria-label="item"
+                                           value="Apple" placeholder="Item">
+                                </div>
+                                <button type="button" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4" data-keep="true">
+                            <button id="add-item-btn" type="button"
+                                    class="btn btn-success btn-lg w-100 d-flex align-items-center justify-content-center gap-2">
+                                <i class="bi bi-plus-circle"></i> Add item
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="items-manager" role="tabpanel" aria-labelledby="items-manager-tab">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Manage items</h1>
+                </div>
+                <div class="col-md-12 text-danger">
+                    <span>This is not implemented yet.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Settings</h1>
+                </div>
+                <div class="col-md-12 text-danger">
+                    <span>This is not implemented yet.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- JS imports -->
+<script src="assets/bootstrap-5.3.5/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="js/init.js"></script>
+</body>
+</html>
