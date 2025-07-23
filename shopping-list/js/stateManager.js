@@ -70,7 +70,7 @@ function renderSelectedList(state) {
             console.error("Failed to create shopping list item:", error);
         }
     });
-    renameActiveList(activeList.name);
+    setActiveListInUI(activeList.name);
 }
 
 /**
@@ -215,9 +215,13 @@ function removeShoppingList(idx) {
 
 function renameActiveList(name) {
     const state = getState();
+    setActiveListInUI(name, state);
+    debouncedUpdateState(state);
+}
+
+function setActiveListInUI(name, state = getState()) {
     const activeList = getListAtIndex(state, state.activeList);
     activeList.name = name;
-    debouncedUpdateState(state);
 }
 
 /**
