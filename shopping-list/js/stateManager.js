@@ -57,6 +57,7 @@ function renderSelectedList(state) {
     }
     showListUI(true);
     document.getElementById(ids.LIST_NAME_TEXT).innerText = activeList.name;
+    document.getElementById(ids.LIST_NAME_INPUT).value = activeList.name;
     activeList.items.forEach((item, idx) => {
         try {
             if (shoppingListRootElement.children.length >= 2) {
@@ -70,7 +71,7 @@ function renderSelectedList(state) {
             console.error("Failed to create shopping list item:", error);
         }
     });
-    setActiveListInUI(activeList.name);
+    setActiveListInUIState(activeList.name);
 }
 
 /**
@@ -215,11 +216,11 @@ function removeShoppingList(idx) {
 
 function renameActiveList(name) {
     const state = getState();
-    setActiveListInUI(name, state);
+    setActiveListInUIState(name, state);
     debouncedUpdateState(state);
 }
 
-function setActiveListInUI(name, state = getState()) {
+function setActiveListInUIState(name, state = getState()) {
     const activeList = getListAtIndex(state, state.activeList);
     activeList.name = name;
 }
