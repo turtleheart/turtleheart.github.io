@@ -2,7 +2,7 @@ import {classes, ids} from "./names.js";
 import {
     moveShoppingListItemInActiveList,
     removeShoppingList,
-    removeShoppingListItemFromActiveList, renameActiveList, setActiveItemAtIndex, setActiveList
+    removeShoppingListItemFromActiveList, setActiveItemAtIndex, setActiveList
 } from "./stateManager.js";
 
 /**

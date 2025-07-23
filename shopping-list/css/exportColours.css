@@ -1,0 +1,29 @@
+.btn-outline-clipboard {
+    color: #4dd0e1;
+    border-color: #4dd0e1;
+
+    &:hover {
+        background-color: #4dd0e1;
+        color: white;
+    }
+}
+
+.btn-outline-json {
+    color: #f0ad4e;
+    border-color: #f0ad4e;
+
+    &:hover {
+        background-color: #f0ad4e;
+        color: white;
+    }
+}
+
+.btn-outline-qr {
+    color: #3daeff;
+    border-color: #3daeff;
+
+    &:hover {
+        background-color: #3daeff;
+        color: white;
+    }
+}

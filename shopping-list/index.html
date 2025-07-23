@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/misc.css">
     <link rel="stylesheet" href="assets/bootstrap-5.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/exportColours.css">
 </head>
 <body class="bg-body-secondary vh-100">
 <nav class="navbar navbar-expand-sm navbar-fixed-top">
@@ -79,7 +80,7 @@
                                 aria-label="Edit list name"><i class="bi bi-pencil"></i>
                         </button>
                     </h2>
-                    <button type="button" class="btn btn-primary d-flex align-items-center gap-2">
+                    <button id="list-export-btn" type="button" class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modal-export-list">
                         <i class="bi bi-upload"></i> Export list
                     </button>
                 </div>
@@ -177,6 +178,64 @@
                 <div class="col-md-12 text-danger">
                     <span>This is not implemented yet.</span>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-export-list" tabindex="-1" aria-labelledby="modal-export-list-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-export-list-label">
+                    <i class="bi bi-upload me-2"></i> Export list
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted mb-4">Choose how you want to export your shopping list:</p>
+                <div class="d-grid gap-2 mb-3">
+                    <button type="button" class="btn btn-outline-qr btn-lg d-flex align-items-center justify-content-center gap-3" id="modal-export-list-btn-qr">
+                        <i class="bi bi-qr-code fs-4"></i>
+                        <div class="text-start">
+                            <div class="fw-semibold">Show QR Code</div>
+                            <small class="text-muted">Scan this QR code with your phone's camera to import your list</small>
+                        </div>
+                    </button>
+                </div>
+                <div class="d-grid gap-2 mb-3">
+                    <button type="button" class="btn btn-outline-json btn-lg d-flex align-items-center justify-content-center gap-3" id="modal-export-list-btn-json">
+                        <i class="bi bi-download fs-4"></i>
+                        <div class="text-start">
+                            <div class="fw-semibold">Download JSON</div>
+                            <small class="text-muted">Save your list as a JSON file</small>
+                        </div>
+                    </button>
+                </div>
+                <div class="d-grid gap-2 mb-3">
+                    <button type="button" class="btn btn-outline-clipboard btn-lg d-flex align-items-center justify-content-center gap-3" id="modal-export-list-btn-clipboard">
+                        <i class="bi bi-clipboard fs-4"></i>
+                        <div class="text-start">
+                            <div class="fw-semibold">Copy to clipboard</div>
+                            <small class="text-muted">Copy the list to your clipboard</small>
+                        </div>
+                    </button>
+                </div>
+                <div id="modal-export-list-qr-code" class="text-center mt-4 d-none">
+                    <hr>
+                    <h6 class="mb-3">QR Code for your list:</h6>
+                    <div id="modal-export-list-qr-code-container" class="d-flex justify-content-center mb-3">
+                        <div class="bg-light border rounded p-3" style="width: 200px; height: 200px; display: flex; align-items: center; justify-content: center;">
+                            <span class="text-muted">Your list's QR Code will appear here</span>
+                        </div>
+                    </div>
+                    <small class="text-muted">You can scan this QR code to import your list on another device</small>
+                </div>
+                <div id="modal-export-list-status" class="alert d-none" role="alert">
+                    <!-- Status messages will show here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
