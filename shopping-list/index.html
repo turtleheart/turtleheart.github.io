@@ -66,7 +66,7 @@
                        class="d-flex align-items-center justify-content-center gap-2 list-group-item list-group-item-action list-group-item-success py-3">
                         <i class="bi bi-plus-circle"></i> Create list
                     </a>
-                    <a href="#" onclick="return false;" data-keep="true"
+                    <a id="list-import-btn" href="#" onclick="return false;" data-keep="true" data-bs-toggle="modal" data-bs-target="#modal-import-list"
                        class="d-flex align-items-center justify-content-center gap-2 list-group-item list-group-item-action list-group-item-primary py-3">
                         <i class="bi bi-download"></i> Import List
                     </a>
@@ -183,6 +183,60 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-import-list" tabindex="-1" aria-labelledby="modal-import-list-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-import-list-label">
+                    <i class="bi bi-download me-2"></i> Import list
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted mb-4">Pick a method to import your shopping list:</p>
+                <div class="d-grid gap-2 mb-3">
+                    <button type="button" class="btn btn-outline-qr btn-lg d-flex align-items-center justify-content-center gap-3" id="modal-import-list-btn-qr">
+                        <i class="bi bi-qr-code fs-4"></i>
+                        <div class="text-start">
+                            <div class="fw-semibold">Scan QR Code</div>
+                            <small class="text-muted">Use your phone's camera to scan a QR code to import your list</small>
+                        </div>
+                    </button>
+                </div>
+                <div class="d-grid gap-2 mb-3">
+                    <button type="button" class="btn btn-outline-json btn-lg d-flex align-items-center justify-content-center gap-3" id="modal-import-list-btn-json">
+                        <i class="bi bi-upload fs-4"></i>
+                        <div class="text-start">
+                            <div class="fw-semibold">Import JSON</div>
+                            <small class="text-muted">Import your list from a JSON file</small>
+                        </div>
+                    </button>
+                </div>
+                <input type="file" id="modal-import-list-file-input" accept="application/json,.json" hidden aria-hidden="true"/>
+                <div class="d-grid gap-2 mb-3">
+                    <button type="button" class="btn btn-outline-clipboard btn-lg d-flex align-items-center justify-content-center gap-3" id="modal-import-list-btn-clipboard">
+                        <i class="bi bi-clipboard fs-4"></i>
+                        <div class="text-start">
+                            <div class="fw-semibold">Copy from clipboard</div>
+                            <small class="text-muted">Read your clipboard's contents to import your list</small>
+                        </div>
+                    </button>
+                </div>
+                <div id="modal-import-list-qr-code" class="text-center mt-4 d-none">
+                    <hr>
+                    <h6 class="mb-3">Scan the QR code for your list:</h6>
+                    <div id="modal-import-list-qr-code-container" class="d-flex justify-content-center mb-3">
+                        <video id="modal-import-list-qr-code-video" style="width: 320px; height: 240px;" muted playsinline></video>
+                    </div>
+                    <small class="text-muted">Hold the camera so that the QR code is centered and in focus</small>
+                </div>
+                <div id="modal-import-list-status" class="alert d-none" role="alert">
+                    <!-- Status messages will show here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="modal-export-list" tabindex="-1" aria-labelledby="modal-export-list-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -243,6 +297,9 @@
 </div>
 <!-- JS imports -->
 <script src="assets/bootstrap-5.3.5/js/bootstrap.bundle.min.js"></script>
+<script src="assets/qrcode.js"></script>
+<script src="assets/qrcode_UTF8.js"></script>
+<script src="assets/zxing.min.js"></script>
 <script type="module" src="js/init.js"></script>
 </body>
 </html>
