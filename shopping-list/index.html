@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Shopping list</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Shopping List">
+    <meta name="msapplication-TileImage" content="assets/icons/icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <link rel="apple-touch-icon" href="assets/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="assets/icons/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="assets/icons/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="assets/icons/icon-384x384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="assets/icons/icon-512x512.png">
+
     <!-- CSS imports -->
     <link rel="stylesheet" href="css/misc.css">
     <link rel="stylesheet" href="css/settings.css">
@@ -426,5 +445,19 @@
 <script src="assets/qrcode_UTF8.js"></script>
 <script src="assets/zxing.min.js"></script>
 <script type="module" src="js/init.js"></script>
+<script>
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('sw.js')
+                .then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                })
+                .catch(function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+        });
+    }
+</script>
 </body>
 </html>
