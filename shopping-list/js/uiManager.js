@@ -197,7 +197,15 @@ let originalNextSibling = null;
  */
 function initDraggableItem(item) {
     const listItem = item.closest(classes.SHOPPING_LIST_ITEM.dot);
-    // When drag starts
+
+    // Touch event variables for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isDragging = false;
+    let dragElement = null;
+
+
+    // When drag starts (desktop)
     listItem.addEventListener('dragstart', (e) => {
         draggedItem = listItem;
         draggedIdx = Number(listItem.dataset.idx);
@@ -207,7 +215,7 @@ function initDraggableItem(item) {
         listItem.classList.add('dragging');
     });
 
-    // When drag ends
+    // When drag ends (desktop)
     listItem.addEventListener('dragend', () => {
         // Only update the data model if the item was actually moved to a new position
         const currentNextSibling = draggedItem.nextSibling;
@@ -228,7 +236,7 @@ function initDraggableItem(item) {
         listItem.classList.remove('dragging');
     });
 
-    // When dragging over another item
+    // When dragging over another item (desktop)
     listItem.addEventListener('dragover', (e) => {
         e.preventDefault();
         const rect = listItem.getBoundingClientRect();
@@ -248,6 +256,107 @@ function initDraggableItem(item) {
             targetIdx = Number(listItem.dataset.idx);
         }
     });
+
+    // When drag starts (mobile)
+    item.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        isDragging = false; // Ensure false at the start of a touch
+
+        e.preventDefault();
+    }, {passive: false});
+
+    // When dragging over another item (mobile)
+    item.addEventListener('touchmove', (e) => {
+        if (!isDragging) {
+            const touch = e.touches[0];
+            const deltaX = Math.abs(touch.clientX - touchStartX);
+            const deltaY = Math.abs(touch.clientY - touchStartY);
+
+            // Start dragging if moved enough
+            if (deltaX > 10 || deltaY > 10) {
+                isDragging = true;
+                draggedItem = listItem;
+                draggedIdx = Number(listItem.dataset.idx);
+                originalNextSibling = listItem.nextSibling;
+                listItem.classList.add('dragging');
+
+                // Create a visual drag element
+                dragElement = listItem.cloneNode(true);
+                dragElement.style.position = 'fixed';
+                dragElement.style.zIndex = '1000';
+                dragElement.style.pointerEvents = 'none';
+                dragElement.style.opacity = '0.8';
+                dragElement.style.transform = 'rotate(5deg)';
+                document.body.appendChild(dragElement);
+            }
+        }
+
+        if (isDragging) {
+            e.preventDefault();
+            const touch = e.touches[0];
+
+            // Move the drag element
+            if (dragElement) {
+                dragElement.style.left = (touch.clientX - 50) + 'px';
+                dragElement.style.top = (touch.clientY - 50) + 'px';
+            }
+
+            // Find the element below the touch point
+            const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+            const targetItem = elementBelow?.closest(classes.SHOPPING_LIST_ITEM.dot);
+
+            // Swap logic - find bounding rectangle, and swap if far enough
+            if (targetItem && targetItem !== draggedItem) {
+                const rect = targetItem.getBoundingClientRect();
+                const isHorizontal = window.innerWidth >= parseFloat(
+                    getComputedStyle(document.documentElement).getPropertyValue('--bs-breakpoint-sm'));
+                const position = isHorizontal ? (touch.clientX - rect.left) : (touch.clientY - rect.top);
+                const threshold = isHorizontal ? rect.width / 2 : rect.height / 2;
+
+                if (position < threshold) {
+                    targetItem.parentNode.insertBefore(draggedItem, targetItem);
+                } else {
+                    targetItem.parentNode.insertBefore(draggedItem, targetItem.nextSibling);
+                }
+                targetIdx = Number(targetItem.dataset.idx);
+            }
+        }
+    }, {passive: false});
+
+    // When drag ends (mobile)
+    item.addEventListener('touchend', (e) => {
+        if (isDragging) {
+            e.preventDefault();
+
+            // Clean up the visual drag element
+            if (dragElement) {
+                document.body.removeChild(dragElement);
+                dragElement = null;
+            }
+
+            // Same logic as dragend for desktop
+            const currentNextSibling = draggedItem.nextSibling;
+            const currentPrevSibling = draggedItem.previousSibling;
+            const didPositionChange = (
+                originalNextSibling !== currentNextSibling ||
+                (originalNextSibling === null && currentPrevSibling !== null)
+            );
+
+            if (didPositionChange && targetIdx !== -1 && targetIdx !== draggedIdx) {
+                moveShoppingListItemInActiveList(Number(draggedIdx), Number(targetIdx));
+            }
+
+            // Reset state
+            draggedItem = null;
+            draggedIdx = -1;
+            targetIdx = -1;
+            originalNextSibling = null;
+            listItem.classList.remove('dragging');
+            isDragging = false;
+        }
+    })
 }
 
 /**

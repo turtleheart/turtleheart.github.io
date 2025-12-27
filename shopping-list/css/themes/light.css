@@ -1,0 +1,13 @@
+/* Augmentation of the BS5 light theme */
+[data-bs-theme="light"] #main-content {
+    opacity: 1;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 1rem;
+    box-shadow: var(--bs-box-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+[data-bs-theme="light"] .navbar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+}

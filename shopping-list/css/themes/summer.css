@@ -1,0 +1,142 @@
+/* Summer theme */
+[data-bs-theme="summer"] {
+    color-scheme: light;
+    --summer-orange: #fd7e14;
+    --summer-sand: #fff4e6;
+    --summer-aqua: #0dcaf0;
+    --summer-ink: #1f1a0f;
+    --summer-surface: rgba(255, 250, 240, 0.92);
+    --summer-surface-2: rgba(255, 244, 230, 0.90);
+    --summer-border: rgba(31, 26, 15, 0.14);
+    --bs-body-color: var(--summer-ink);
+    --bs-body-bg: #fffaf0;
+    --bs-emphasis-color: #161209;
+    --bs-secondary-color: rgba(31, 26, 15, 0.72);
+    --bs-tertiary-color: rgba(31, 26, 15, 0.52);
+    --bs-secondary-bg: #fff1d6;
+    --bs-tertiary-bg: var(--summer-sand);
+    --bs-primary: var(--summer-orange);
+    --bs-info: var(--summer-aqua);
+    --bs-link-color: var(--summer-orange);
+    --bs-link-hover-color: #d9650c;
+    --bs-link-color-rgb: 253, 126, 20;
+    --bs-link-hover-color-rgb: 217, 101, 12;
+    --bs-info-bg-subtle: rgba(13, 202, 240, 0.14);
+    --bs-info-border-subtle: rgba(13, 202, 240, 0.35);
+    --bs-info-text-emphasis: #087990;
+    --bs-primary-text-emphasis: #d9480f;
+    --bs-primary-bg-subtle: rgba(253, 126, 20, 0.14);
+    --bs-primary-border-subtle: rgba(253, 126, 20, 0.45);
+    --bs-warning-text-emphasis: #cc9a06;
+    --bs-warning-bg-subtle: #fff3bf;
+    --bs-border-color: #f3d2a6;
+    --bs-border-color-translucent: var(--summer-border);
+    --bs-focus-ring-color: rgba(253, 126, 20, 0.30);
+    --bs-box-shadow-sm: 0 .125rem .25rem rgba(31, 26, 15, 0.10);
+    --bs-box-shadow: 0 .5rem 1.25rem rgba(31, 26, 15, 0.12);
+    --bs-highlight-color: var(--summer-ink);
+    --bs-highlight-bg: #fff3bf;
+    --bs-code-color: #6f42c1;
+    --bs-form-valid-color: #2b8a3e;
+    --bs-form-valid-border-color: #2b8a3e;
+    --bs-form-invalid-color: #b02a37;
+    --bs-form-invalid-border-color: #b02a37;
+}
+
+[data-bs-theme="summer"] body {
+    background-image:
+            radial-gradient(circle at 20% 0%, rgba(13, 202, 240, 0.18), transparent 45%),
+            linear-gradient(to bottom, rgba(255, 244, 230, 0.55), rgba(255, 250, 240, 0.82)),
+            url("../../assets/images/themes/bg-summer.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+[data-bs-theme="summer"] #main-content {
+    opacity: 1;
+    background-color: var(--summer-surface);
+    border: 1px solid var(--summer-border);
+    border-radius: 1rem;
+    box-shadow: var(--bs-box-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+[data-bs-theme="summer"] .navbar {
+    background-color: rgba(255, 250, 240, 0.82);
+    border-bottom: 1px solid var(--summer-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+[data-bs-theme="summer"] .card:not(.theme-tile),
+[data-bs-theme="summer"] .modal-content {
+    background-color: var(--summer-surface);
+    border: 1px solid var(--summer-border);
+    box-shadow: var(--bs-box-shadow-sm);
+}
+
+[data-bs-theme="summer"] .list-group-item {
+    border-color: var(--summer-border);
+}
+
+[data-bs-theme="summer"] .list-group-item-action:hover {
+    background-color: rgba(255, 244, 230, 0.78);
+}
+
+[data-bs-theme="summer"] .list-group-item.active {
+    background-color: rgba(255, 244, 230, 0.98);
+    color: var(--summer-ink);
+    border-color: rgba(253, 126, 20, 0.55);
+    box-shadow: inset 0 0 0 1px rgba(253, 126, 20, 0.26);
+}
+
+[data-bs-theme="summer"] .btn-primary {
+    box-shadow: 0 .25rem .75rem rgba(253, 126, 20, 0.22);
+}
+
+[data-bs-theme="summer"] .btn-info {
+    box-shadow: 0 .25rem .75rem rgba(13, 202, 240, 0.18);
+}
+
+[data-bs-theme="summer"] .btn-outline-primary,
+[data-bs-theme="summer"] .btn-outline-json,
+[data-bs-theme="summer"] .btn-outline-qr,
+[data-bs-theme="summer"] .btn-outline-clipboard {
+    border-color: rgba(253, 126, 20, 0.65);
+    color: var(--summer-ink);
+    background-color: rgba(255, 244, 230, 0.48);
+}
+
+[data-bs-theme="summer"] .btn-outline-primary:hover,
+[data-bs-theme="summer"] .btn-outline-json:hover,
+[data-bs-theme="summer"] .btn-outline-qr:hover,
+[data-bs-theme="summer"] .btn-outline-clipboard:hover {
+    background-color: var(--summer-aqua);
+    border-color: var(--summer-aqua);
+}
+
+[data-bs-theme="summer"] .form-control,
+[data-bs-theme="summer"] .form-select {
+    background-color: rgba(255, 250, 240, 0.92);
+    border-color: rgba(31, 26, 15, 0.22);
+}
+
+[data-bs-theme="summer"] .form-control:focus,
+[data-bs-theme="summer"] .form-select:focus {
+    border-color: rgba(253, 126, 20, 0.78);
+    box-shadow: 0 0 0 .25rem rgba(253, 126, 20, 0.20);
+}
+
+[data-bs-theme="summer"] .shopping-list-item {
+    background-color: rgba(255, 244, 230, 0.70);
+    border-color: var(--summer-border) !important;
+}
+
+[data-bs-theme="summer"] .alert-info,
+[data-bs-theme="summer"] .text-bg-info,
+[data-bs-theme="summer"] .badge.text-bg-info {
+    border: 1px solid rgba(13, 202, 240, 0.40);
+}

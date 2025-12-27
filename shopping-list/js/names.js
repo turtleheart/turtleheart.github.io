@@ -50,6 +50,14 @@ const classes = {
         raw: "selection-list-item-name",
         dot: ".selection-list-item-name"
     },
+    SETTINGS_THEME_CARD: {
+        raw: "settings-look-theme-card",
+        dot: ".settings-look-theme-card"
+    },
+    SETTINGS_THEME_CARD_RADIO: {
+        raw: "settings-look-theme-card-radio",
+        dot: ".settings-look-theme-card-radio"
+    },
     SHOPPING_LIST_ITEM: {
         raw: "shopping-list-item",
         dot: ".shopping-list-item",

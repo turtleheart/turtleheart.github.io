@@ -26,3 +26,14 @@
  * @property {string} raw
  * @property {string} dot
  */
+
+/**
+ * Settings object.
+ * @typedef {Object} Settings
+ * @property {Theme} theme
+ */
+
+/**
+ * Visual theme.
+ * @typedef {"dark"|"light"|"winter"|"spring"|"summer"|"autumn"} Theme
+ */

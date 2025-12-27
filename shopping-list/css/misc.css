@@ -1,6 +1,6 @@
 #lists-container .shopping-list-item.dragging {
     opacity: 0.5;
-    border: 2px dashed #000 !important;
+    border: 2px dashed var(--bs-body-color) !important;
 }
 
 #lists-container .shopping-list-item:has(.shopping-list-item-checked input:checked) {
@@ -10,4 +10,31 @@
 
 #lists-container .shopping-list-item {
     background-color: var(--bs-tertiary-bg);
+}
+
+#lists-container .shopping-list-item {
+    border-radius: .75rem;
+}
+
+@media (min-width: 576px) {
+    #main-content {
+        border-radius: 10px;
+    }
+    #lists-container .shopping-list-item {
+        border-radius: 0;
+    }
+}
+
+.logo {
+    background-image: url(../assets/images/logo-dark.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+[data-bs-theme='dark'] .logo {
+    background-image: url(../assets/images/logo-light.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }

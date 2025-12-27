@@ -16,9 +16,10 @@ const _DEFAULT_STATE = {
     shoppingLists: [],
     activeList: -1
 };
-
-/** @type {string} */
-const _DEFAULT_LIST_NAME = 'My List';
+/** @type {Settings} */
+const _DEFAULT_SETTINGS = {
+    theme: 'dark'
+};
 
 /**
  * @returns {ShoppingList}
@@ -41,8 +42,11 @@ function DEFAULT_STATE() {
     return structuredClone(_DEFAULT_STATE);
 }
 
-function DEFAULT_LIST_NAME() {
-    return _DEFAULT_LIST_NAME;
+/**
+ * @return {Settings}
+ */
+function DEFAULT_SETTINGS() {
+    return structuredClone(_DEFAULT_SETTINGS);
 }
 
-export { DEFAULT_STATE, DEFAULT_SHOPPING_LIST, DEFAULT_SHOPPING_LIST_ITEM, DEFAULT_LIST_NAME };
+export { DEFAULT_STATE, DEFAULT_SHOPPING_LIST, DEFAULT_SHOPPING_LIST_ITEM, DEFAULT_SETTINGS };

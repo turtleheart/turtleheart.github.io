@@ -1,0 +1,140 @@
+/* Spring theme */
+[data-bs-theme="spring"] {
+    color-scheme: light;
+    --spring-mint: #20c997;
+    --spring-wash: #e6fff7;
+    --spring-sun: #ffc107;
+    --spring-ink: #0f2a1f;
+    --spring-surface: rgba(244, 255, 248, 0.92);
+    --spring-surface-2: rgba(230, 255, 247, 0.90);
+    --spring-border: rgba(15, 42, 31, 0.14);
+    --bs-body-color: var(--spring-ink);
+    --bs-body-color-rgb: 15, 42, 31;
+    --bs-body-bg: #f4fff8;
+    --bs-body-bg-rgb: 244, 255, 248;
+    --bs-emphasis-color: #0b2017;
+    --bs-emphasis-color-rgb: 11, 32, 23;
+    --bs-secondary-color: rgba(15, 42, 31, 0.72);
+    --bs-tertiary-color: rgba(15, 42, 31, 0.52);
+    --bs-secondary-bg: var(--spring-wash);
+    --bs-secondary-bg-rgb: 230, 255, 247;
+    --bs-tertiary-bg: #f0fffa;
+    --bs-tertiary-bg-rgb: 240, 255, 250;
+    --bs-primary: var(--spring-mint);
+    --bs-primary-rgb: 32, 201, 151;
+    --bs-warning: var(--spring-sun);
+    --bs-warning-rgb: 255, 193, 7;
+    --bs-link-color: var(--spring-mint);
+    --bs-link-hover-color: #0f7f63;
+    --bs-link-color-rgb: 32, 201, 151;
+    --bs-link-hover-color-rgb: 15, 127, 99;
+    --bs-border-color: #b2edd8;
+    --bs-border-color-translucent: var(--spring-border);
+    --bs-focus-ring-color: rgba(32, 201, 151, 0.28);
+    --bs-box-shadow-sm: 0 .125rem .25rem rgba(15, 42, 31, 0.10);
+    --bs-box-shadow: 0 .5rem 1.25rem rgba(15, 42, 31, 0.12);
+    --bs-primary-text-emphasis: #0f7f63;
+    --bs-secondary-text-emphasis: #176b55;
+    --bs-dark-text-emphasis: var(--spring-ink);
+    --bs-primary-bg-subtle: var(--spring-wash);
+    --bs-secondary-bg-subtle: #eefcf6;
+    --bs-dark-bg-subtle: #c9f7ea;
+    --bs-primary-border-subtle: #7be3c8;
+    --bs-secondary-border-subtle: #c3f2e3;
+    --bs-dark-border-subtle: #6fe0c2;
+    --bs-highlight-color: var(--spring-ink);
+    --bs-highlight-bg: #fff3cd;
+    --bs-code-color: #8a2be2;
+}
+
+[data-bs-theme="spring"] body {
+    background-image:
+            linear-gradient(to bottom, rgba(230, 255, 247, 0.55), rgba(244, 255, 248, 0.82)),
+            url("../../assets/images/themes/bg-spring.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+[data-bs-theme="spring"] #main-content {
+    opacity: 1;
+    background-color: var(--spring-surface);
+    border: 1px solid var(--spring-border);
+    border-radius: 1rem;
+    box-shadow: var(--bs-box-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+[data-bs-theme="spring"] .navbar {
+    background-color: rgba(244, 255, 248, 0.82);
+    border-bottom: 1px solid var(--spring-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+[data-bs-theme="spring"] .card:not(.theme-tile),
+[data-bs-theme="spring"] .modal-content {
+    background-color: var(--spring-surface);
+    border: 1px solid var(--spring-border);
+    box-shadow: var(--bs-box-shadow-sm);
+}
+
+[data-bs-theme="spring"] .list-group-item {
+    border-color: var(--spring-border);
+}
+
+[data-bs-theme="spring"] .list-group-item-action:hover {
+    background-color: rgba(230, 255, 247, 0.70);
+}
+
+[data-bs-theme="spring"] .list-group-item.active {
+    background-color: var(--spring-wash);
+    color: var(--spring-ink);
+    border-color: rgba(32, 201, 151, 0.40);
+    box-shadow: inset 0 0 0 1px rgba(32, 201, 151, 0.22);
+}
+
+[data-bs-theme="spring"] .btn-primary {
+    box-shadow: 0 .25rem .75rem rgba(32, 201, 151, 0.20);
+}
+
+[data-bs-theme="spring"] .btn-outline-primary,
+[data-bs-theme="spring"] .btn-outline-json,
+[data-bs-theme="spring"] .btn-outline-qr,
+[data-bs-theme="spring"] .btn-outline-clipboard {
+    border-color: rgba(32, 201, 151, 0.50);
+    color: var(--spring-ink);
+    background-color: rgba(230, 255, 247, 0.40);
+}
+
+[data-bs-theme="spring"] .btn-outline-primary:hover,
+[data-bs-theme="spring"] .btn-outline-json:hover,
+[data-bs-theme="spring"] .btn-outline-qr:hover,
+[data-bs-theme="spring"] .btn-outline-clipboard:hover {
+    background-color: var(--spring-sun);
+    border-color: var(--spring-sun);
+}
+
+[data-bs-theme="spring"] .form-control,
+[data-bs-theme="spring"] .form-select {
+    background-color: rgba(244, 255, 248, 0.90);
+    border-color: rgba(15, 42, 31, 0.22);
+}
+
+[data-bs-theme="spring"] .form-control:focus,
+[data-bs-theme="spring"] .form-select:focus {
+    border-color: rgba(32, 201, 151, 0.70);
+    box-shadow: 0 0 0 .25rem rgba(32, 201, 151, 0.18);
+}
+
+[data-bs-theme="spring"] .shopping-list-item {
+    background-color: rgba(244, 255, 248, 0.75);
+    border-color: var(--spring-border) !important;
+}
+
+[data-bs-theme="spring"] .badge.text-bg-warning,
+[data-bs-theme="spring"] .alert-warning {
+    border: 1px solid rgba(255, 193, 7, 0.35);
+}

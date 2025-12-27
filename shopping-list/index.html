@@ -6,15 +6,22 @@
     <title>Shopping list</title>
     <!-- CSS imports -->
     <link rel="stylesheet" href="css/misc.css">
+    <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="assets/bootstrap-5.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/bootstrap-icons-1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/exportColours.css">
+    <link rel="stylesheet" href="css/themes/winter.css">
+    <link rel="stylesheet" href="css/themes/spring.css">
+    <link rel="stylesheet" href="css/themes/summer.css">
+    <link rel="stylesheet" href="css/themes/autumn.css">
+    <link rel="stylesheet" href="css/themes/dark.css">
+    <link rel="stylesheet" href="css/themes/light.css">
 </head>
 <body class="bg-body-secondary vh-100">
 <nav class="navbar navbar-expand-sm navbar-fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#" onclick="window.location.reload(); return false;">
-            <img src="assets/images/logo.png" alt="logo" width="30px" height="30px" class="d-inline-block align-text-top">
+            <span style="width: 30px;height: 30px" class="logo d-inline-block align-text-top"></span>
             Shopping List
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,9 +31,6 @@
             <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a id="lists-tab" class="nav-link active" aria-current="page" href="#" data-bs-toggle="tab" data-bs-target="#lists" aria-controls="lists">Lists</a>
-                </li>
-                <li class="nav-item">
-                    <a id="items-manager-tab" class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#items-manager" aria-controls="items-manager">Manage items</a>
                 </li>
                 <li class="nav-item">
                     <a id="settings-tab" class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#settings" aria-controls="settings">Settings</a>
@@ -158,26 +162,144 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="items-manager" role="tabpanel" aria-labelledby="items-manager-tab">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Manage items</h1>
-                </div>
-                <div class="col-md-12 text-danger">
-                    <span>This is not implemented yet.</span>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h1>Settings</h1>
+                <div class="col-sm-2 col-md-2 border-end mb-4">
+                    <div class="col-md-12">
+                        <h1>Settings</h1>
+                    </div>
+                    <div class="list-group">
+                        <a href="#" onclick="return false;"
+                           class="d-flex justify-content-between list-group-item list-group-item-action py-3
+                           active">
+                            <span>Look & Feel</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-md-12 text-danger">
-                    <span>This is not implemented yet.</span>
+                <div class="col-sm-10 col-md-10" style="min-height: 90vh;">
+                    <div class="container">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="mt-2 d-flex align-items-center gap-2">
+                                <span class="settings-name-text">Look & Feel</span>
+                            </h2>
+                        </div>
+                        <div class="row row-cols-2 row-cols-md-3 g-3" role="radiogroup" aria-label="Theme selection">
+                            <!-- Dark -->
+                            <div class="col settings-look-theme-card" data-bs-theme="dark">
+                                <input class="btn-check settings-look-theme-card-radio" type="radio" name="theme" id="themeDark" value="dark" autocomplete="off" checked>
+                                <label class="card h-100 shadow-sm theme-tile" for="themeDark">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="fw-semibold">Dark</div>
+                                            <span class="badge text-bg-primary theme-selected-badge d-none">Selected</span>
+                                        </div>
+                                        <div class="d-flex gap-2 mt-3" aria-hidden="true">
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#0d6efd;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#212529;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#6c757d;"></span>
+                                        </div>
+                                        <div class="text-muted small mt-2">Neutral dark</div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Light -->
+                            <div class="col settings-look-theme-card" data-bs-theme="light">
+                                <input class="btn-check settings-look-theme-card-radio" type="radio" name="theme" id="themeLight" value="light" autocomplete="off">
+                                <label class="card h-100 shadow-sm theme-tile" for="themeLight">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="fw-semibold">Light</div>
+                                            <span class="badge text-bg-primary theme-selected-badge d-none">Selected</span>
+                                        </div>
+                                        <div class="d-flex gap-2 mt-3" aria-hidden="true">
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#0d6efd;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#ffffff;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#adb5bd;"></span>
+                                        </div>
+                                        <div class="text-muted small mt-2">Neutral light</div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Winter -->
+                            <div class="col settings-look-theme-card" data-bs-theme="winter">
+                                <input class="btn-check settings-look-theme-card-radio" type="radio" name="theme" id="themeWinter" value="winter" autocomplete="off">
+                                <label class="card h-100 shadow-sm theme-tile" for="themeWinter">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="fw-semibold">Winter</div>
+                                            <span class="badge text-bg-primary theme-selected-badge d-none">Selected</span>
+                                        </div>
+                                        <div class="d-flex gap-2 mt-3" aria-hidden="true">
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#0d6efd;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#e7f1ff;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#6c757d;"></span>
+                                        </div>
+                                        <div class="text-muted small mt-2">Cool, crisp accents</div>
+                                    </div>
+                                </label>
+                            </div>
+                            <!-- Spring -->
+                            <div class="col settings-look-theme-card" data-bs-theme="spring">
+                                <input class="btn-check settings-look-theme-card-radio" type="radio" name="theme" id="themeSpring" value="spring" autocomplete="off">
+                                <label class="card h-100 shadow-sm theme-tile" for="themeSpring">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="fw-semibold">Spring</div>
+                                            <span class="badge text-bg-primary theme-selected-badge d-none">Selected</span>
+                                        </div>
+                                        <div class="d-flex gap-2 mt-3" aria-hidden="true">
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#20c997;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#e6fff7;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#ffc107;"></span>
+                                        </div>
+                                        <div class="text-muted small mt-2">Fresh greens</div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Summer -->
+                            <div class="col settings-look-theme-card" data-bs-theme="summer">
+                                <input class="btn-check settings-look-theme-card-radio" type="radio" name="theme" id="themeSummer" value="summer" autocomplete="off">
+                                <label class="card h-100 shadow-sm theme-tile" for="themeSummer">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="fw-semibold">Summer</div>
+                                            <span class="badge text-bg-primary theme-selected-badge d-none">Selected</span>
+                                        </div>
+                                        <div class="d-flex gap-2 mt-3" aria-hidden="true">
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#fd7e14;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#fff4e6;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#0dcaf0;"></span>
+                                        </div>
+                                        <div class="text-muted small mt-2">Warm & bright</div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Autumn -->
+                            <div class="col settings-look-theme-card" data-bs-theme="autumn">
+                                <input class="btn-check settings-look-theme-card-radio" type="radio" name="theme" id="themeAutumn" value="autumn" autocomplete="off">
+                                <label class="card h-100 shadow-sm theme-tile" for="themeAutumn">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="fw-semibold">Autumn</div>
+                                            <span class="badge text-bg-primary theme-selected-badge d-none">Selected</span>
+                                        </div>
+                                        <div class="d-flex gap-2 mt-3" aria-hidden="true">
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#dc3545;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#ffe6e6;"></span>
+                                            <span class="rounded-2 border" style="width:18px;height:18px;background:#6f42c1;"></span>
+                                        </div>
+                                        <div class="text-muted small mt-2">Reds & berries</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -233,6 +355,9 @@
                 <div id="modal-import-list-status" class="alert d-none" role="alert">
                     <!-- Status messages will show here -->
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

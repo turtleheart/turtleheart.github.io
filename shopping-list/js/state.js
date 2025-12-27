@@ -9,7 +9,7 @@ let State = loadState();
 
 /**
  * Load the state of the application from local storage.
- * @returns {State} The state loaded from local storage, or an empty object if
+ * @returns {State} The state loaded from local storage, or a default state if
  *                      no state was found.
  */
 function loadState() {

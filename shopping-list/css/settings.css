@@ -1,0 +1,21 @@
+
+.theme-tile {
+    cursor: pointer; transition: transform .05s ease-in-out;
+}
+
+.theme-tile:hover {
+    transform: translateY(-1px);
+}
+
+.btn-check:not(:checked) + .theme-tile {
+    border: 2px solid var(--bs-secondary);
+}
+
+.btn-check:checked + .theme-tile {
+    border: 2px solid var(--bs-primary);
+    box-shadow: 0 .25rem .75rem rgba(0,0,0,.08);
+}
+
+.btn-check:checked + .theme-tile .theme-selected-badge {
+    display: inline-block !important;
+}

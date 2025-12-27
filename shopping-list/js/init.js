@@ -1,7 +1,9 @@
-import {debouncedUpdateState, getState, subscribe} from "./state.js";
+import {getState, subscribe} from "./state.js";
+import {getSettings, subscribe as subscribeSettings} from "./settings.js";
 import {addShoppingList, addShoppingListItem, renameActiveList, renderUI} from "./stateManager.js";
 import {classes, ids} from "./names.js";
 import {DEFAULT_SHOPPING_LIST, DEFAULT_SHOPPING_LIST_ITEM} from "./defaults.js";
+import {applySettings, setTheme} from "./settingsManager.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     /**
@@ -322,8 +324,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render the UI from the stored state when the page loads
     renderUI(getState());
 
+    // Bind settings cards to their theme
+    document.querySelectorAll(classes.SETTINGS_THEME_CARD.dot).forEach(card => {
+        card.addEventListener('click', event => {
+            const theme = card.querySelector(classes.SETTINGS_THEME_CARD_RADIO.dot).value;
+            setTheme(theme);
+        });
+    });
+
+    // Restore stored settings
+    applySettings(getSettings());
+
     // Make UI update when state is saved
     subscribe((state) => {
         renderUI(state);
+    });
+
+    // Make the application update when settings are saved
+    subscribeSettings((settings) => {
+        applySettings(settings);
     });
 });
