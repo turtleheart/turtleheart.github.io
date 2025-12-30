@@ -16,6 +16,12 @@
     border-radius: .75rem;
 }
 
+.drag-handle {
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 @media (min-width: 576px) {
     #main-content {
         border-radius: 10px;
